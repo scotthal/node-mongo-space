@@ -7,21 +7,23 @@ services:
       dockerfile: Dockerfile
     command: sleep infinity
     volumes:
-      - ..:/workspaces/node-data-space
+      - ..:/workspaces/node-mongo-space
     ports:
       - "3000:3000"
     networks:
-      - node-data
-  postgres:
-    image: postgres:latest
+      - node-mongo
+  mongo:
+    image: mongo:latest
+    restart: always
     environment:
-      - POSTGRES_PASSWORD=noprod
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: noprod
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - mongodata:/data/db
     networks:
-      - node-data
+      - node-mongo
 volumes:
-  pgdata:
+  mongodata:
 networks:
-  node-data:
+  node-mongo:
     driver: bridge
