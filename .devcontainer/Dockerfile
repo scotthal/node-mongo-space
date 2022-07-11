@@ -13,10 +13,10 @@ RUN \
   echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen; \
   locale-gen; \
   update-locale LANG=en_US.UTF-8; \
-  echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list; \
-  curl -L https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - ; \
+  curl -L https://www.mongodb.org/static/pgp/server-5.0.asc | apt-key add - ; \
+  echo "deb http://repo.mongodb.org/apt/debian $(lsb_release -cs)/mongodb-org/5.0 main" > /etc/apt/sources.list.d/mongodb-org-5.0.list; \
   apt-get update; \
-  apt-get -y install postgresql-client; \
+  apt-get -y install mongodb-org-shell; \
   groupadd --gid $USER_GID $USERNAME; \
   useradd -s /bin/zsh --uid $USER_UID --gid $USER_GID -m $USERNAME; \
   echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME; \
