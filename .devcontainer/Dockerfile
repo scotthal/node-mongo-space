@@ -17,6 +17,9 @@ RUN \
   echo "deb http://repo.mongodb.org/apt/debian $(lsb_release -cs)/mongodb-org/5.0 main" > /etc/apt/sources.list.d/mongodb-org-5.0.list; \
   apt-get update; \
   apt-get -y install mongodb-org-shell; \
+  curl -L https://downloads.mongodb.com/compass/mongodb-mongosh_1.5.0_amd64.deb > /tmp/mongosh.deb; \
+  dpkg -i /tmp/mongosh.deb; \
+  rm -f /tmp/mongosh.deb; \
   groupadd --gid $USER_GID $USERNAME; \
   useradd -s /bin/zsh --uid $USER_UID --gid $USER_GID -m $USERNAME; \
   echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME; \
